@@ -28,6 +28,11 @@ const config: Config = {
     locales: ['zh-CN', 'en'],
   },
 
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   presets: [
     [
