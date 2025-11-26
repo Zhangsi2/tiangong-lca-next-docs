@@ -19,6 +19,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: '平台概览',
         description: '了解 TianGong LCA 的定位、核心价值以及相关的资源与支持。',
+        slug: '/overview',
       },
       items: ['intro', 'resources-and-support'],
     },
@@ -29,6 +30,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: '快速开始',
         description: '完成注册、首次登录与核心操作演示，快速熟悉平台。',
+        slug: '/quick-start',
       },
       items: ['quick-start/first-login', 'quick-start/demonstrations'],
     },
@@ -39,6 +41,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: '用户指南',
         description: '深入了解平台按键说明、数据管理与协作功能的使用方式。',
+        slug: '/user-guide',
       },
       items: [
         'user-guide/overview',
@@ -60,6 +63,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: '数据收集',
         description: '掌握数据收集规范，并通过案例了解建模与质量控制流程。',
+        slug: '/data-collection',
       },
       items: [
         'data-collection/data-collection-instructions',
@@ -70,6 +74,7 @@ const sidebars: SidebarsConfig = {
             type: 'generated-index',
             title: '数据收集案例',
             description: '基于实际调研与文献的案例解析常见数据处理方法。',
+            slug: '/data-collection/case-introduction',
           },
           items: [
             'data-collection/case-introduction/data-evaluation',
@@ -86,6 +91,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: '集成与扩展',
         description: '连接 MCP 等外部工具，扩展 TianGong LCA 的工作流能力。',
+        slug: '/integration',
       },
       items: [
         'MCP/lca_local',
@@ -105,6 +111,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: '部署与开发',
         description: '获取私有化部署步骤与开发环境配置指南。',
+        slug: '/deploy-and-dev',
       },
       items: ['deploy/local-deploy', 'dev/dev-env'],
     },
@@ -115,6 +122,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: '常见问题',
         description: '解答模型构建、数据引用、认证等常见疑问。',
+        slug: '/faq',
       },
       items: [
         'faq/system-models',
@@ -131,6 +139,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: '更新日志',
         description: '追踪 TianGong LCA 新功能与迭代内容。',
+        slug: '/changelog',
       },
       items: ['changelog/function-update'],
     },
