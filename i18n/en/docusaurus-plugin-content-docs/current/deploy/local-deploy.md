@@ -217,18 +217,51 @@ docker compose pull
 docker compose up -d
 ```
 
-### Backup
+### Backup and Restore
 
-To backup your PostgreSQL database:
+#### Option A: Volume Snapshot (Recommended)
+
+The following examples assume the current `docker-compose.yml` service names (the database container is `supabase-db`). Run them in the `docker/` directory.
+
+The most reliable approach is to snapshot the entire `volumes/` directory (Postgres data, Supabase Storage files, Redis/other runtime data). You can migrate or roll back by replacing it directly.
+
+##### 1. Create a snapshot
+
+> Stop all containers first to avoid dirty data.
+
+```bash
+cd docker
+docker compose down
+tar -czf tiangong_volumes_snapshot_$(date +%Y-%m-%d_%H-%M-%S).tar.gz volumes
+docker compose up -d
+```
+
+##### 2. Restore a snapshot (same machine or new machine)
+
+```bash
+cd docker
+docker compose down
+mv volumes volumes.before_restore_$(date +%Y%m%d_%H%M%S)
+tar -xzf tiangong_volumes_snapshot_YYYY-MM-DD_HH-MM-SS.tar.gz
+docker compose up -d
+```
+
+> Notes:
+>
+> - Ensure the target machine uses the same code version and the same secrets in `.env` (JWT, Supabase keys, etc.).
+> - Keep snapshots from multiple points in time for safe rollbacks.
+> - If you only want to restore Storage, you can replace `volumes/storage`, but a full restore is recommended to keep the database and files consistent.
+
+#### Option B: PostgreSQL Logical Backup (pg_dumpall)
+
+##### 1. Create a backup
 
 ```bash
 # Create a backup of the PostgreSQL database
 docker exec -t supabase-db pg_dumpall -c -U postgres > backup_$(date +%Y-%m-%d_%H-%M-%S).sql
 ```
 
-### Restore
-
-To restore from a backup:
+##### 2. Restore a backup
 
 ```bash
 # Stop the services

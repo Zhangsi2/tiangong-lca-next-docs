@@ -217,18 +217,51 @@ docker compose pull
 docker compose up -d
 ```
 
-### 备份
+### 备份与恢复
 
-备份 PostgreSQL 数据库：
+#### 方案 A：数据卷快照（推荐）
+
+以下示例基于当前 `docker-compose.yml` 的容器名称（数据库容器为 `supabase-db`）。建议在 `docker/` 目录下执行。
+
+最可靠的做法是快照整个 `volumes/` 目录（包含 Postgres 数据、Supabase Storage 文件以及 Redis/其他运行态数据）。需要迁移或回滚时直接替换即可。
+
+##### 1. 创建快照
+
+> 先停止所有容器，避免写入造成脏数据。
+
+```bash
+cd docker
+docker compose down
+tar -czf tiangong_volumes_snapshot_$(date +%Y-%m-%d_%H-%M-%S).tar.gz volumes
+docker compose up -d
+```
+
+##### 2. 恢复快照（本机或新机器）
+
+```bash
+cd docker
+docker compose down
+mv volumes volumes.before_restore_$(date +%Y%m%d_%H%M%S)
+tar -xzf tiangong_volumes_snapshot_YYYY-MM-DD_HH-MM-SS.tar.gz
+docker compose up -d
+```
+
+> 注意事项：
+>
+> - 确保目标机器使用相同的代码版本和 `.env` 中的密钥（JWT、Supabase KEY 等）。
+> - 建议保留多份不同时间点的快照，以便安全回滚。
+> - 如确实只想恢复 Storage，可以只替换 `volumes/storage`，但推荐整体恢复以保证数据库与文件一致。
+
+#### 方案 B：PostgreSQL 逻辑备份（pg_dumpall）
+
+##### 1. 创建备份
 
 ```bash
 # 创建 PostgreSQL 数据库备份
 docker exec -t supabase-db pg_dumpall -c -U postgres > backup_$(date +%Y-%m-%d_%H-%M-%S).sql
 ```
 
-### 恢复
-
-从备份恢复数据：
+##### 2. 恢复备份
 
 ```bash
 # 停止服务
