@@ -143,6 +143,73 @@ docker compose up -d --build
 
 ## 配置选项
 
+### 前端定制配置（品牌与布局）
+
+> 本节说明如何在不修改业务代码的情况下，配置浅色/深色主色与 Logo，以及布局与多语言标题。
+
+#### 第一部分：品牌定制（Light/Dark 主色与 Logo）
+
+**1. 配置品牌环境变量**
+
+使用 `docker/.env.example` 来创建 `docker/.env`，并配置：
+
+```bash
+APP_LIGHT_PRIMARY='#5C246A'
+APP_DARK_PRIMARY='#9e3ffd'
+APP_LIGHT_LOGO=/logo.svg
+APP_DARK_LOGO=/logo_dark.svg
+```
+
+**2. 替换 Logo 资源（可选）**
+
+如果沿用默认路径，直接替换以下文件：
+
+- `public/logo.svg`
+- `public/logo_dark.svg`
+
+如果你要使用其他路径或 URL，可通过 `APP_LIGHT_LOGO` 与 `APP_DARK_LOGO` 指定。
+
+**默认值与行为**
+
+| 模式 | navTheme   | colorPrimary | logo             |
+| ---- | ---------- | ------------ | ---------------- |
+| 浅色 | `light`    | `#5C246A`    | `/logo.svg`      |
+| 深色 | `realDark` | `#9e3ffd`    | `/logo_dark.svg` |
+
+#### 第二部分：布局与多语言标题定制（Layout / Title / Login Subtitle）
+
+**1. 配置环境变量**
+
+在 `docker/.env` 中配置：
+
+```bash
+# 布局：side | top | mix
+APP_LAYOUT=mix
+
+# 平台标题（用于布局头部标题、浏览器标签标题、登录页标题）
+APP_TITLE_ZH_CN='天工生命周期数据平台'
+APP_TITLE_EN_US='TianGong LCA Data Platform'
+
+# 登录页副标题
+APP_LOGIN_SUBTITLE_ZH_CN='全球最大的开放生命周期数据平台'
+APP_LOGIN_SUBTITLE_EN_US="World's Largest Open LCA Data Platform"
+```
+
+**2. 默认值与回退规则**
+
+| 配置项 | 作用位置 | 默认/回退 |
+| ---- | ---- | ---- |
+| `APP_LAYOUT` | 全站布局 | 未配置或非法值时使用 `mix` |
+| `APP_TITLE_ZH_CN` | `zh-CN` 下的平台标题 | 未配置时回退到 i18n `pages.name` |
+| `APP_TITLE_EN_US` | `en-US` 下的平台标题 | 未配置时回退到 i18n `pages.name` |
+| `APP_LOGIN_SUBTITLE_ZH_CN` | `zh-CN` 下登录页副标题 | 未配置时回退到 i18n `pages.login.subTitle` |
+| `APP_LOGIN_SUBTITLE_EN_US` | `en-US` 下登录页副标题 | 未配置时回退到 i18n `pages.login.subTitle` |
+
+**3. 标题解析顺序**
+
+- 平台标题：优先使用当前语言对应的 `APP_TITLE_*`，否则回退 `pages.name`。
+- 登录页副标题：优先使用当前语言对应的 `APP_LOGIN_SUBTITLE_*`，否则回退 `pages.login.subTitle`。
+
 ### Edge Functions
 
 该设置支持 Supabase Edge Functions，函数存储在 `docker/volumes/functions` 目录中。
