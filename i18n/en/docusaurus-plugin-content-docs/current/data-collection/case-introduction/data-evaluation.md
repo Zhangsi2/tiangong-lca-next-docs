@@ -18,13 +18,13 @@ Before modeling, assess the selected data's availability, focusing on input-outp
 
 - **Methanol Production Pathway Data Availability Assessment**
 
-| ID | Pathway Name               | Data Availability | Unavailability Reason |
-|----|---------------------------|-------------------|----------------------|
-| 1  | Coal Gasification to Methanol | ✅ Available | — |
-| 2  | Coal Coking to Methanol | ⚠ Partially Available | Output exceeds input in coal mining/processing; coal production and methanol process data available |
-| 3  | Natural Gas to Methanol | ❌ Unavailable | Large input-output discrepancy, material imbalance, cannot be corrected - excluded |
-| 4  | Biomass to Methanol (BOTM) | ✅ Available | — |
-| 5  | CO₂ Capture to Methanol | ✅ Available | — |
+| ID | Pathway Name | Data Availability | Unavailability Reason |
+| --- | --- | --- | --- |
+| 1 | Coal Gasification to Methanol | ✅ Available | — |
+| 2 | Coal Coking to Methanol | ⚠ Partially Available | Output exceeds input in coal mining/processing; coal production and methanol process data available |
+| 3 | Natural Gas to Methanol | ❌ Unavailable | Large input-output discrepancy, material imbalance, cannot be corrected - excluded |
+| 4 | Biomass to Methanol (BOTM) | ✅ Available | — |
+| 5 | CO₂ Capture to Methanol | ✅ Available | — |
 
 Selected **Biomass to Methanol (BOTM)** as the example case.
 

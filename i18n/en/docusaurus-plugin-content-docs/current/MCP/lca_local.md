@@ -20,10 +20,10 @@ Click the software icon to enter the downloaded openLCA interface and begin file
 2. Select Import: In the menu, click the "Import" option to prepare for importing data files.  
 3. Import File: In the "Import" submenu, select "File" or "Other" based on the actual data format.
 
-    | Import Option | Purpose                             | Common Supported Formats/Types                                      |
-    | :------------ | :--------------------------------- | :------------------------------------------------------------------- |
-    | **File**      | Import complete databases or standard dataset files. | `.zolca`, `EcoSpold`, `ILCD`, `SimaPro CSV`, `Excel`   |
-    | **Other**     | Import specific components or perform advanced import configuration. | Import entire databases, specific components (processes, flows, methods, etc.), `GeoJSON`, mapping files |
+    | Import Option | Purpose | Common Supported Formats/Types |
+    | --- | --- | --- |
+    | **File** | Import complete databases or standard dataset files. | `.zolca`, `EcoSpold`, `ILCD`, `SimaPro CSV`, `Excel` |
+    | **Other** | Import specific components or perform advanced import configuration. | Import entire databases, specific components (processes, flows, methods, etc.), `GeoJSON`, mapping files |
 
 4. Browse Data: After import completion, expand and view data in the main interface navigation bar.  
 

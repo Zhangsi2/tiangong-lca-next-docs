@@ -149,7 +149,7 @@ docker compose up -d --build
 
 #### 第一部分：品牌定制（Light/Dark 主色与 Logo）
 
-**1. 配置品牌环境变量**
+##### 1. 配置品牌环境变量
 
 使用 `docker/.env.example` 来创建 `docker/.env`，并配置：
 
@@ -160,7 +160,7 @@ APP_LIGHT_LOGO=/logo.svg
 APP_DARK_LOGO=/logo_dark.svg
 ```
 
-**2. 替换 Logo 资源（可选）**
+##### 2. 替换 Logo 资源（可选）
 
 如果沿用默认路径，直接替换以下文件：
 
@@ -169,7 +169,7 @@ APP_DARK_LOGO=/logo_dark.svg
 
 如果你要使用其他路径或 URL，可通过 `APP_LIGHT_LOGO` 与 `APP_DARK_LOGO` 指定。
 
-**默认值与行为**
+##### 默认值与行为
 
 | 模式 | navTheme   | colorPrimary | logo             |
 | ---- | ---------- | ------------ | ---------------- |
@@ -178,7 +178,7 @@ APP_DARK_LOGO=/logo_dark.svg
 
 #### 第二部分：布局与多语言标题定制（Layout / Title / Login Subtitle）
 
-**1. 配置环境变量**
+##### 1. 配置环境变量
 
 在 `docker/.env` 中配置：
 
@@ -195,7 +195,7 @@ APP_LOGIN_SUBTITLE_ZH_CN='全球最大的开放生命周期数据平台'
 APP_LOGIN_SUBTITLE_EN_US="World's Largest Open LCA Data Platform"
 ```
 
-**2. 默认值与回退规则**
+##### 2. 默认值与回退规则
 
 | 配置项 | 作用位置 | 默认/回退 |
 | ---- | ---- | ---- |
@@ -205,7 +205,7 @@ APP_LOGIN_SUBTITLE_EN_US="World's Largest Open LCA Data Platform"
 | `APP_LOGIN_SUBTITLE_ZH_CN` | `zh-CN` 下登录页副标题 | 未配置时回退到 i18n `pages.login.subTitle` |
 | `APP_LOGIN_SUBTITLE_EN_US` | `en-US` 下登录页副标题 | 未配置时回退到 i18n `pages.login.subTitle` |
 
-**3. 标题解析顺序**
+##### 3. 标题解析顺序
 
 - 平台标题：优先使用当前语言对应的 `APP_TITLE_*`，否则回退 `pages.name`。
 - 登录页副标题：优先使用当前语言对应的 `APP_LOGIN_SUBTITLE_*`，否则回退 `pages.login.subTitle`。

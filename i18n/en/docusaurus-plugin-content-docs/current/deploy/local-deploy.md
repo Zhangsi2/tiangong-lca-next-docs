@@ -149,7 +149,7 @@ docker compose up -d --build
 
 #### Part 1: Branding (Light/Dark Primary & Logo)
 
-**1. Configure branding environment variables**
+##### 1. Configure branding environment variables
 
 Create `docker/.env` from `docker/.env.example`, then set:
 
@@ -160,7 +160,7 @@ APP_LIGHT_LOGO=/logo.svg
 APP_DARK_LOGO=/logo_dark.svg
 ```
 
-**2. Replace logo assets (optional)**
+##### 2. Replace logo assets (optional)
 
 If you keep the default paths, replace these files directly:
 
@@ -169,18 +169,18 @@ If you keep the default paths, replace these files directly:
 
 If you want other paths or URLs, set `APP_LIGHT_LOGO` and `APP_DARK_LOGO`.
 
-**Defaults and behavior**
+##### Defaults and behavior
 
-| Mode | navTheme   | colorPrimary | logo             |
-| ---- | ---------- | ------------ | ---------------- |
-| Light | `light`    | `#5C246A`    | `/logo.svg`      |
-| Dark  | `realDark` | `#9e3ffd`    | `/logo_dark.svg` |
+| Mode | navTheme | colorPrimary | logo |
+| --- | --- | --- | --- |
+| Light | `light` | `#5C246A` | `/logo.svg` |
+| Dark | `realDark` | `#9e3ffd` | `/logo_dark.svg` |
 
 ---
 
 #### Part 2: Layout & Multilingual Titles (Layout / Title / Login Subtitle)
 
-**1. Configure environment variables**
+##### 1. Configure environment variables
 
 Set the following in `docker/.env`:
 
@@ -197,17 +197,17 @@ APP_LOGIN_SUBTITLE_ZH_CN='全球最大的开放生命周期数据平台'
 APP_LOGIN_SUBTITLE_EN_US="World's Largest Open LCA Data Platform"
 ```
 
-**2. Defaults and fallback rules**
+##### 2. Defaults and fallback rules
 
 | Config | Used in | Default/Fallback |
-| ---- | ---- | ---- |
+| --- | --- | --- |
 | `APP_LAYOUT` | Site layout | Use `mix` when unset or invalid |
 | `APP_TITLE_ZH_CN` | Platform title in `zh-CN` | Fallback to i18n `pages.name` |
 | `APP_TITLE_EN_US` | Platform title in `en-US` | Fallback to i18n `pages.name` |
 | `APP_LOGIN_SUBTITLE_ZH_CN` | Login subtitle in `zh-CN` | Fallback to i18n `pages.login.subTitle` |
 | `APP_LOGIN_SUBTITLE_EN_US` | Login subtitle in `en-US` | Fallback to i18n `pages.login.subTitle` |
 
-**3. Resolution order**
+##### 3. Resolution order
 
 - Platform title: prefer the current locale's `APP_TITLE_*`, otherwise `pages.name`.
 - Login subtitle: prefer the current locale's `APP_LOGIN_SUBTITLE_*`, otherwise `pages.login.subTitle`.
