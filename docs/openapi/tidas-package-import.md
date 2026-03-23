@@ -94,13 +94,24 @@ curl -i --location --request POST "${BASE_URL}/import_tidas_package" \
 
 - `job_id`：后续轮询任务状态时使用
 - `source_artifact_id`：后续 `enqueue` 时必须回传
-- `upload.bucket` + `upload.path` + `upload.token`：推荐用于 Supabase Storage
-  的 signed upload helper
-- `upload.signed_url`：可选的直传地址；存在时也可直接 `PUT` ZIP 字节
+- `upload.signed_url`：命令行或通用 HTTP 客户端可直接使用的上传地址
+- `upload.bucket` + `upload.path` + `upload.token`：适合已接入 Supabase Storage
+  SDK 的客户端
 
 ## 2. 上传 ZIP 数据
 
-推荐方式：使用 Supabase Storage 的 `uploadToSignedUrl(...)`
+如果返回的 `upload.signed_url` 不为空，推荐直接上传 ZIP：
+
+```bash
+curl -i --request PUT "${SIGNED_URL}" \
+  --header 'Content-Type: application/zip' \
+  --data-binary @./example-package.zip
+```
+
+其中 `SIGNED_URL` 即 `prepare_upload` 响应中的 `upload.signed_url`。
+
+如果你的客户端已经接入 Supabase Storage SDK，也可以使用
+`upload.bucket`、`upload.path` 和 `upload.token` 调用 `uploadToSignedUrl(...)`：
 
 ```ts
 const { error } = await supabase.storage
@@ -109,14 +120,6 @@ const { error } = await supabase.storage
     contentType: upload.content_type,
     upsert: true,
   });
-```
-
-如果返回的 `upload.signed_url` 不为空，也可以直接上传：
-
-```bash
-curl -i --request PUT "${SIGNED_URL}" \
-  --header 'Content-Type: application/zip' \
-  --data-binary @./example-package.zip
 ```
 
 ## 3. Enqueue

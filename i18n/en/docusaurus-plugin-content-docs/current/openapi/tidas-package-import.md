@@ -97,13 +97,28 @@ Important fields:
 
 - `job_id`: used when polling the async job
 - `source_artifact_id`: required in the later `enqueue` call
-- `upload.bucket` + `upload.path` + `upload.token`: the preferred signed upload
-  helper inputs
-- `upload.signed_url`: optional direct-upload URL when available
+- `upload.signed_url`: the direct upload URL that CLI or generic HTTP clients
+  can use
+- `upload.bucket` + `upload.path` + `upload.token`: useful when your client is
+  already integrated with the Supabase Storage SDK
 
 ## 2. Upload the ZIP File
 
-Preferred approach: use Supabase Storage `uploadToSignedUrl(...)`
+If `upload.signed_url` is present, the recommended CLI-friendly approach is to
+upload the ZIP directly:
+
+```bash
+curl -i --request PUT "${SIGNED_URL}" \
+  --header 'Content-Type: application/zip' \
+  --data-binary @./example-package.zip
+```
+
+Here `SIGNED_URL` is the `upload.signed_url` value returned by
+`prepare_upload`.
+
+If your client already uses the Supabase Storage SDK, you can alternatively use
+`upload.bucket`, `upload.path`, and `upload.token` with
+`uploadToSignedUrl(...)`:
 
 ```ts
 const { error } = await supabase.storage
@@ -112,14 +127,6 @@ const { error } = await supabase.storage
     contentType: upload.content_type,
     upsert: true,
   });
-```
-
-If `upload.signed_url` is not null, you can also upload the ZIP directly:
-
-```bash
-curl -i --request PUT "${SIGNED_URL}" \
-  --header 'Content-Type: application/zip' \
-  --data-binary @./example-package.zip
 ```
 
 ## 3. Enqueue
