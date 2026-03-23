@@ -33,6 +33,12 @@ Authorization: Bearer <USER_API_KEY>
 https://<your-project-ref>.supabase.co/functions/v1
 ```
 
+如果你使用的是 TianGong LCA 当前云上服务，可直接使用：
+
+```text
+https://qgzvkongdjqiiamzbbts.supabase.co/functions/v1
+```
+
 ## 导入流程总览
 
 完整流程分为 4 步：

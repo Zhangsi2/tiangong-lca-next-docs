@@ -35,6 +35,12 @@ Example base URL:
 https://<your-project-ref>.supabase.co/functions/v1
 ```
 
+If you are using the current TianGong LCA cloud service, use:
+
+```text
+https://qgzvkongdjqiiamzbbts.supabase.co/functions/v1
+```
+
 ## Flow Overview
 
 The full import flow has four steps:
