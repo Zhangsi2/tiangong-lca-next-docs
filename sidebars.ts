@@ -106,6 +106,17 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'OpenAPI',
+      link: {
+        type: 'generated-index',
+        title: 'OpenAPI',
+        description: '查看 TianGong LCA 对外开放接口的调用约定与示例。',
+        slug: '/docs/openapi',
+      },
+      items: ['openapi/tidas-package-import'],
+    },
+    {
+      type: 'category',
       label: '部署与开发',
       link: {
         type: 'generated-index',
